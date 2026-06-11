@@ -1,0 +1,38 @@
+# Dependencies
+node_modules/
+client/node_modules/
+server/node_modules/
+
+# Python
+venv/
+__pycache__/
+*.pyc
+
+# Environment Variables
+.env
+.env.local
+
+# Build files
+dist/
+build/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# VS Code
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Coverage
+coverage/
+
+# Python cache
+.pytest_cache/
+
+# TypeScript
+*.tsbuildinfo
