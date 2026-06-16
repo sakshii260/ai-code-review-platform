@@ -4,28 +4,79 @@ from "express";
 import User
 from "../models/User.model";
 
-const router =
-Router();
+import {
+ generateAccessToken,
+ generateRefreshToken,
+ verifyAccessToken
+}
+from "../utils/jwt";
 
-router.post(
-  "/seed",
 
-  async (_, res) => {
 
-    const user =
-    await User.create({
+const router = Router();
 
-      username:
-      "sakshi",
+router.get("/seed", async (_, res) => {
 
-      email:
-      "sakshi@gmail.com"
+  const randomNumber = Math.floor(
+    Math.random() * 100000
+  );
 
-    });
+  const user = await User.create({
+    username: `sakshi${randomNumber}`,
+    email: `sakshi${randomNumber}@gmail.com`,
+    password: "12345678"
+  });
 
-    res.json(user);
+  res.json(user);
 
-  }
+});
+
+router.get(
+"/token",
+
+async (_,res)=>{
+
+const accessToken =
+generateAccessToken(
+"123456"
 );
+
+const refreshToken =
+generateRefreshToken(
+"123456"
+);
+
+res.json({
+
+accessToken,
+
+refreshToken
+
+});
+
+}
+);
+
+router.get(
+"/verify",
+
+async (_,res)=>{
+
+const token =
+generateAccessToken(
+"123456"
+);
+
+const payload =
+verifyAccessToken(
+token
+);
+
+res.json(payload);
+
+}
+);
+
+
 
 export default router;

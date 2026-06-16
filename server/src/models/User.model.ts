@@ -4,28 +4,39 @@ import mongoose, {
   HydratedDocument
 } from "mongoose";
 
+import bcrypt from "bcryptjs";
+
 export interface IUser {
-  githubId?: string;
 
-  username: string;
+ githubId?: string;
 
-  email: string;
+ username: string;
 
-  avatar?: string;
+ email: string;
 
-  plan: "free" | "pro";
+ password: string;
 
-  stats: {
-    reviewsSubmitted: number;
-    reviewsGiven: number;
-    totalIssuesFound: number;
-  };
+ avatar?: string;
 
-  refreshToken?: string;
+ plan: "free" | "pro";
+
+ stats: {
+   reviewsSubmitted: number;
+   reviewsGiven: number;
+   totalIssuesFound: number;
+ };
+
+ refreshToken?: string;
 }
 
 export interface IUserMethods {
+
   isPro(): boolean;
+
+  comparePassword(
+    candidatePassword:string
+  ):Promise<boolean>;
+
 }
 
 export interface UserModel
@@ -74,6 +85,11 @@ const UserSchema = new Schema<
       unique: true,
       lowercase: true,
       trim: true
+    },
+
+    password: {
+      type: String,
+      required: true
     },
 
     avatar: {
@@ -129,6 +145,18 @@ function () {
   return this.plan === "pro";
 };
 
+UserSchema.methods.comparePassword =
+async function (
+ candidatePassword:string
+){
+
+ return bcrypt.compare(
+   candidatePassword,
+   this.password
+ );
+
+};
+
 UserSchema.statics.findByEmail =
 function (email: string) {
   return this.findOne({ email });
@@ -140,6 +168,31 @@ function (githubId: string) {
     githubId
   });
 };
+UserSchema.pre(
+ "save",
+
+ async function(next){
+
+  if(
+   !this.isModified(
+    "password"
+   )
+  ){
+   return next();
+  }
+
+  const salt =
+  await bcrypt.genSalt(10);
+
+  this.password =
+  await bcrypt.hash(
+   this.password,
+   salt
+  );
+
+  next();
+ }
+);
 
 export const User =
 mongoose.model<

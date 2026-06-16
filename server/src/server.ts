@@ -6,6 +6,9 @@ from "./routes/test.routes";
 import { connectDatabase }
 from "./config/database";
 
+import authRoutes
+from "./routes/auth.routes";
+
 const app = express();
 
 app.use(express.json());
@@ -13,6 +16,11 @@ app.use(express.json());
 app.use(
   "/api/test",
   testRoutes
+);
+
+app.use(
+  "/api/auth",
+  authRoutes
 );
 
 app.get("/", (_, res) => {
