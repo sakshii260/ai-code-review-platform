@@ -79,9 +79,10 @@ throw new Error(
 );
 }
 
+
 const isMatch =
 await user.comparePassword(
-data.password
+ data.password
 );
 
 if (!isMatch) {

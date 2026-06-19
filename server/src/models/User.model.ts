@@ -132,13 +132,7 @@ const UserSchema = new Schema<
   }
 );
 
-UserSchema.index({
-  email: 1
-});
 
-UserSchema.index({
-  githubId: 1
-});
 
 UserSchema.methods.isPro =
 function () {
