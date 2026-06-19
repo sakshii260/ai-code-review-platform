@@ -1,107 +1,280 @@
+import { motion }
+from "framer-motion";
+
+import Navbar
+from "../../components/layout/Navbar";
+
 import Button
 from "../../components/ui/Button";
 
-import GlassCard
-from "../../components/ui/GlassCard";
+import StatCard
+from "../../components/ui/StatCard";
 
-function LandingPage() {
+import FeatureCard
+from "../../components/ui/FeatureCard";
 
-  return (
+function LandingPage(){
 
-    <div
-      className="
-      min-h-screen
-      bg-black
-      text-white
-      hero-gradient
-      flex
-      items-center
-      justify-center
-      px-8
-      "
+ return(
+
+  <div
+
+   className="
+
+   min-h-screen
+
+   bg-black
+
+   text-white
+
+   "
+
+  >
+
+   <Navbar />
+
+   <section
+
+    className="
+
+    hero-gradient
+
+    min-h-screen
+
+    flex
+
+    flex-col
+
+    justify-center
+
+    items-center
+
+    text-center
+
+    px-8
+
+    "
+
+   >
+
+    <motion.h1
+
+     initial={{
+      opacity:0,
+      y:40
+     }}
+
+     animate={{
+      opacity:1,
+      y:0
+     }}
+
+     transition={{
+      duration:1
+     }}
+
+     className="
+
+     text-7xl
+
+     font-bold
+
+     max-w-5xl
+
+     "
+
     >
 
-      <div
-        className="
-        max-w-5xl
-        text-center
-        "
-      >
+     AI Powered
 
-        <h1
-          className="
-          text-7xl
-          font-bold
-          mb-6
-          "
-        >
+     Code Reviews
 
-          AI Code Review
+    </motion.h1>
 
-        </h1>
+    <motion.p
 
-        <p
-          className="
-          text-gray-400
-          text-xl
-          mb-10
-          "
-        >
+     initial={{
+      opacity:0
+     }}
 
-          Review Code Faster,
-          Smarter and Better
-          with AI.
+     animate={{
+      opacity:1
+     }}
 
-        </p>
+     transition={{
+      delay:0.5
+     }}
 
-        <div
-          className="
-          flex
-          justify-center
-          mb-12
-          "
-        >
+     className="
 
-          <Button>
-            Get Started
-          </Button>
+     text-gray-400
 
-        </div>
+     text-xl
 
-        <GlassCard>
+     mt-6
 
-          <h2
-            className="
-            text-2xl
-            font-semibold
-            mb-4
-            "
-          >
+     max-w-2xl
 
-            Features
+     "
 
-          </h2>
+    >
 
-          <p
-            className="
-            text-gray-400
-            "
-          >
+     Analyze repositories,
+     detect issues,
+     and improve code quality
+     with AI.
 
-            AI Reviews,
-            Repository Tracking,
-            Issue Detection,
-            Team Collaboration
+    </motion.p>
 
-          </p>
+    <div
 
-        </GlassCard>
+     className="
 
-      </div>
+     mt-10
+
+     "
+
+    >
+
+     <Button>
+
+      Start Reviewing
+
+     </Button>
 
     </div>
 
-  );
+   </section>
+
+   <section
+
+    className="
+
+    max-w-6xl
+
+    mx-auto
+
+    px-8
+
+    py-20
+
+    grid
+
+    md:grid-cols-3
+
+    gap-6
+
+    "
+
+   >
+
+    <StatCard
+
+     title="Repositories"
+
+     value="500+"
+
+    />
+
+    <StatCard
+
+     title="Reviews"
+
+     value="12K+"
+
+    />
+
+    <StatCard
+
+     title="Issues Found"
+
+     value="25K+"
+
+    />
+
+   </section>
+
+   <section
+
+    className="
+
+    max-w-6xl
+
+    mx-auto
+
+    px-8
+
+    py-20
+
+    "
+
+   >
+
+    <h2
+
+     className="
+
+     text-5xl
+
+     font-bold
+
+     text-center
+
+     mb-12
+
+     "
+
+    >
+
+     Features
+
+    </h2>
+
+    <div
+
+     className="
+
+     grid
+
+     md:grid-cols-3
+
+     gap-6
+
+     "
+
+    >
+
+     <FeatureCard
+
+      title="AI Reviews"
+
+      description="Automated code analysis."
+
+     />
+
+     <FeatureCard
+
+      title="Repository Tracking"
+
+      description="Manage repositories easily."
+
+     />
+
+     <FeatureCard
+
+      title="Issue Detection"
+
+      description="Find bugs instantly."
+
+     />
+
+    </div>
+
+   </section>
+
+  </div>
+
+ );
 
 }
 
