@@ -14,6 +14,11 @@ from "../pages/Auth/LoginPage";
 import RegisterPage
 from "../pages/Auth/RegisterPage";
 
+import DashboardPage
+from "../pages/Dashboard/DashboardPage";
+
+
+
 function AppRoutes() {
 
   return (
@@ -34,6 +39,13 @@ function AppRoutes() {
           path="/register"
           element={<RegisterPage />}
         />
+
+        <Route
+          path="/dashboard"
+          element={
+            <DashboardPage />
+            }
+/>
 
       </Routes>
     </BrowserRouter>
